@@ -27,7 +27,7 @@ public class Battleship extends Application {
 
     private Parent createContent() {
         BorderPane root = new BorderPane();
-        root.setPrefSize(500, 700);
+        root.setPrefSize(700, 550);
 
         root.setRight(new Text("RIGHT SIDEBAR - CONTROLS"));
 
@@ -43,7 +43,6 @@ public class Battleship extends Application {
 
             if (enemyBoard.ships == 0) {
                 System.out.println("YOU WIN");
-                System.exit(0);
             }
 
             if (enemyTurn)
@@ -83,7 +82,6 @@ public class Battleship extends Application {
 
             if (playerBoard.ships == 0) {
                 System.out.println("YOU LOSE");
-                System.exit(0);
             }
         }
     }

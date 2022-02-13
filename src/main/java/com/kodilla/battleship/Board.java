@@ -146,7 +146,7 @@ public class Board extends Parent {
         private Board board;
 
         public Cell(int x, int y, Board board) {
-            super(20, 20);
+            super(22, 22);
             this.x = x;
             this.y = y;
             this.board = board;
