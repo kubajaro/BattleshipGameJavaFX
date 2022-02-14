@@ -6,16 +6,16 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.kodilla.battleship.Board.Cell;
 
-public class Battleship extends Application {
 
+public class Battleship extends Application {
     private boolean running = false;
     private Board enemyBoard, playerBoard;
 
@@ -27,7 +27,7 @@ public class Battleship extends Application {
 
     private Parent createContent() {
         BorderPane root = new BorderPane();
-        root.setPrefSize(700, 550);
+        root.setPrefSize(800, 550);
 
         root.setRight(new Text("RIGHT SIDEBAR - CONTROLS"));
 
@@ -40,6 +40,7 @@ public class Battleship extends Application {
                 return;
 
             enemyTurn = !cell.shoot();
+
 
             if (enemyBoard.ships == 0) {
                 System.out.println("YOU WIN");
@@ -70,20 +71,39 @@ public class Battleship extends Application {
     }
 
     private void enemyMove() {
+        Cell cell = null;
+        int x = 0;
+        int y = 0;
         while (enemyTurn) {
-            int x = random.nextInt(10);
-            int y = random.nextInt(10);
+            x = random.nextInt(10);
+            y = random.nextInt(10);
+            System.out.println("X: " + x);
+            System.out.println("Y: " + y);
 
-            Cell cell = playerBoard.getCell(x, y);
+            cell = playerBoard.getCell(x, y);
             if (cell.wasShot)
                 continue;
 
+
+            System.out.println("Here");
             enemyTurn = cell.shoot();
+
 
             if (playerBoard.ships == 0) {
                 System.out.println("YOU LOSE");
             }
         }
+
+        if (enemyTurn) {
+            if (x >= 0 && x != 10) {
+                cell = playerBoard.getCell(x + 1, y);
+                enemyTurn = cell.shoot();
+            } else {
+                cell = playerBoard.getCell(x + 1, y);
+                enemyTurn = cell.shoot();
+            }
+        }
+
     }
 
     private void startGame() {
