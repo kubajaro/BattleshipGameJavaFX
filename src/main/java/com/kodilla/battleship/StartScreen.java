@@ -6,7 +6,7 @@ import javafx.scene.layout.*;
 
 import java.awt.*;
 
-public class StartScreen {
+public class StartScreen extends Parent {
     static Image image = new Image("battleship.jpg");
 
     public static Parent startScreen(){

@@ -1,18 +1,25 @@
 package com.kodilla.battleship;
 
+import java.awt.*;
 import java.util.Random;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.kodilla.battleship.Board.Cell;
+
+import javax.sound.midi.SysexMessage;
 
 
 public class Battleship extends Application {
@@ -25,11 +32,23 @@ public class Battleship extends Application {
 
     private Random random = new Random();
 
+
     private Parent createContent() {
         BorderPane root = new BorderPane();
         root.setPrefSize(800, 550);
 
-        root.setRight(new Text("RIGHT SIDEBAR - CONTROLS"));
+        Button restartGame = new Button("Restart game");
+        restartGame.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                startGame();
+            }
+        });
+        root.setRight(restartGame);
+
+
+        //root.setRight(new Text("RIGHT SIDEBAR - CONTROLS"));
 
         enemyBoard = new Board(true, event -> {
             if (!running)
@@ -71,37 +90,69 @@ public class Battleship extends Application {
     }
 
     private void enemyMove() {
+
+//        int x = random.nextInt(10);
+//        int y = random.nextInt(10);
+//
+//        Cell cell = playerBoard.getCell(x,y);
+//
+//        while (cell.wasShot){
+//            x = random.nextInt(10);
+//            y = random.nextInt(10);
+//            cell = playerBoard.getCell(x,y);
+//            if(!cell.wasShot) break;
+//        }
+//
+//        enemyTurn = cell.shoot();
+
+
         Cell cell = null;
-        int x = 0;
-        int y = 0;
-        while (enemyTurn) {
+        int x = 0, y = 0;
+        if (enemyTurn) {
             x = random.nextInt(10);
             y = random.nextInt(10);
-            System.out.println("X: " + x);
-            System.out.println("Y: " + y);
+            System.out.println("Pierwsze IF X: " + x);
+            System.out.println("Piererwsze IF Y: " + y);
 
             cell = playerBoard.getCell(x, y);
-            if (cell.wasShot)
-                continue;
+            while(cell.wasShot){
+                x = random.nextInt(10);
+                y = random.nextInt(10);
 
-
-            System.out.println("Here");
-            enemyTurn = cell.shoot();
-
-
-            if (playerBoard.ships == 0) {
-                System.out.println("YOU LOSE");
+                System.out.println("WHILE X: " + x);
+                System.out.println("WHILE Y: " + y);
+                cell = playerBoard.getCell(x, y);
+                if (!cell.wasShot){
+                    break;
+                }
             }
         }
 
-        if (enemyTurn) {
-            if (x >= 0 && x != 10) {
+        enemyTurn = cell.shoot();
+
+        while(enemyTurn){
+            if(x < 5){
                 cell = playerBoard.getCell(x + 1, y);
-                enemyTurn = cell.shoot();
-            } else {
-                cell = playerBoard.getCell(x + 1, y);
-                enemyTurn = cell.shoot();
+                System.out.println("dobitla z +1");
+            }else if(x > 4){
+                cell = playerBoard.getCell(x - 1, y);
+                System.out.println("dobitla z -1");
             }
+            while(cell.wasShot){
+                x = random.nextInt(10);
+                y = random.nextInt(10);
+                System.out.println("dobitka + powtorzony");
+                cell = playerBoard.getCell(x, y);
+                if(!cell.wasShot) break;
+            }
+            enemyTurn = cell.shoot();
+            if(!enemyTurn) break;
+            if(enemyTurn) continue;
+        }
+
+
+        if (playerBoard.ships == 0) {
+            System.out.println("YOU LOSE");
         }
 
     }
