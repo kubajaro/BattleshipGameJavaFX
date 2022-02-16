@@ -17,6 +17,9 @@ public class Board extends Parent {
     private boolean enemy = false;
     public int ships = 5;
 
+    public Board() {
+    }
+
     public Board(boolean enemy, EventHandler<? super MouseEvent> handler) {
         this.enemy = enemy;
         for (int y = 0; y < 10; y++) {

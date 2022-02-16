@@ -10,6 +10,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -24,9 +25,6 @@ public class Battleship extends Application {
     private Stage mainStage;
     private Scene startScene;
     private Button startGameButton;
-
-    //private Image backgroundImage = new Image(new FileInputStream("https://github.com/kubajaro/BattleshipGameJavaFX/blob/6b60d47dbf94d60e0ef7ae582fe35688c80e0215/src/main/java/com/kodilla/battleship/battleship.jpg"));
-
 
     private boolean running = false;
     private Board enemyBoard, playerBoard;
@@ -44,6 +42,10 @@ public class Battleship extends Application {
     private Parent createContent() {
         BorderPane root = new BorderPane();
         root.setPrefSize(800, 550);
+
+        BackgroundImage backgroundImage = new BackgroundImage(new Image("file:battleship.jpg", 800,550,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT ,BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+        root.setBackground(new Background(backgroundImage));
 
 
         Button restartGame = new Button("Restart game");
@@ -188,6 +190,9 @@ public class Battleship extends Application {
         BorderPane root = new BorderPane();
         root.setPrefSize(800, 550);
 
+        BackgroundImage backgroundImage = new BackgroundImage(new Image("file:battleship.jpg", 800,550,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT ,BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
+
         startScene = new Scene(root);
         mainStage = new Stage(StageStyle.DECORATED);
         mainStage.setTitle("Battleship");
@@ -195,6 +200,7 @@ public class Battleship extends Application {
         startGameButton.setOnAction(e -> switchScene(createGameScene()));
 
         root.setCenter(startGameButton);
+        root.setBackground(new Background(backgroundImage));
         mainStage.setScene(startScene);
 
         return mainStage;
