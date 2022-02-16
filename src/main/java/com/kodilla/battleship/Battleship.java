@@ -1,6 +1,6 @@
 package com.kodilla.battleship;
 
-import java.awt.*;
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 import javafx.application.Application;
@@ -10,19 +10,24 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import com.kodilla.battleship.Board.Cell;
-
-import javax.sound.midi.SysexMessage;
+import javafx.stage.StageStyle;
 
 
 public class Battleship extends Application {
+    private Scene gameScene;
+
+    private Stage mainStage;
+    private Scene startScene;
+    private Button startGameButton;
+
+    //private Image backgroundImage = new Image(new FileInputStream("https://github.com/kubajaro/BattleshipGameJavaFX/blob/6b60d47dbf94d60e0ef7ae582fe35688c80e0215/src/main/java/com/kodilla/battleship/battleship.jpg"));
+
+
     private boolean running = false;
     private Board enemyBoard, playerBoard;
 
@@ -32,17 +37,22 @@ public class Battleship extends Application {
 
     private Random random = new Random();
 
+    public Battleship() throws FileNotFoundException {
+    }
+
 
     private Parent createContent() {
         BorderPane root = new BorderPane();
         root.setPrefSize(800, 550);
 
+
         Button restartGame = new Button("Restart game");
         restartGame.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                running = false;
+                switchScene(gameScene);
 
-                startGame();
             }
         });
         root.setRight(restartGame);
@@ -146,8 +156,8 @@ public class Battleship extends Application {
                 if(!cell.wasShot) break;
             }
             enemyTurn = cell.shoot();
-            if(!enemyTurn) break;
             if(enemyTurn) continue;
+            if (playerBoard.ships == 0) break;
         }
 
 
@@ -171,15 +181,40 @@ public class Battleship extends Application {
         }
 
         running = true;
+        type = 5;
+    }
+
+    private Stage createStartStage(){
+        BorderPane root = new BorderPane();
+        root.setPrefSize(800, 550);
+
+        startScene = new Scene(root);
+        mainStage = new Stage(StageStyle.DECORATED);
+        mainStage.setTitle("Battleship");
+        startGameButton = new Button("Start game");
+        startGameButton.setOnAction(e -> switchScene(createGameScene()));
+
+        root.setCenter(startGameButton);
+        mainStage.setScene(startScene);
+
+        return mainStage;
+    }
+
+    private Scene createGameScene(){
+        gameScene = new Scene(createContent());
+        return gameScene;
+    }
+
+    public void switchScene(Scene scene){
+        mainStage.setScene(scene);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Scene scene = new Scene(createContent());
-        primaryStage.setTitle("Battleship");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
+
+        mainStage = createStartStage();
+        mainStage.show();
+
     }
 
     public static void main(String[] args) {
