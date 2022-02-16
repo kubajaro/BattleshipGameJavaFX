@@ -2,18 +2,16 @@ import com.kodilla.battleship.Board;
 import org.junit.jupiter.api.Test;
 import org.powermock.reflect.Whitebox;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BoardTestSuite {
+    Board board = new Board();
 
     @Test
     void isValidPointTest() throws Exception {
         //given
-        Board board = new Board();
         double a = 2, b = 2;
         double c = 11, d = 3;
         double e = 12, f = 12;
