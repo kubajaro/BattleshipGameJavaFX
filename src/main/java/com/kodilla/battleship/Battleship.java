@@ -150,11 +150,11 @@ public class Battleship extends Application {
                 cell = playerBoard.getCell(x - 1, y);
                 System.out.println("dobitla z -1");
             }
-            while(cell.wasShot){
+            if(cell.wasShot){
                 x = random.nextInt(10);
                 y = random.nextInt(10);
                 System.out.println("dobitka + powtorzony");
-                cell = playerBoard.getCell(x, y);
+                cell = playerBoard.getCell(x - 1, y);
                 if(!cell.wasShot) break;
             }
             enemyTurn = cell.shoot();
