@@ -34,6 +34,7 @@ public class Battleship extends Application {
 
     private Random random = new Random();
 
+    private EnemyMove enemyMove = new EnemyMove();
 
     private Parent createContent() {
         BorderPane root = new BorderPane();
@@ -74,7 +75,7 @@ public class Battleship extends Application {
             }
 
             if (enemyTurn)
-                enemyMove();
+                enemyMove.enemyMove(playerBoard);
         });
 
         playerBoard = new Board(false, event -> {
