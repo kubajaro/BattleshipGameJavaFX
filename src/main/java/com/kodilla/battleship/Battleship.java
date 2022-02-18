@@ -1,6 +1,5 @@
 package com.kodilla.battleship;
 
-import java.io.FileNotFoundException;
 import java.util.Random;
 
 import javafx.application.Application;
@@ -34,9 +33,6 @@ public class Battleship extends Application {
     private boolean enemyTurn = false;
 
     private Random random = new Random();
-
-    public Battleship() throws FileNotFoundException {
-    }
 
 
     private Parent createContent() {
@@ -117,55 +113,55 @@ public class Battleship extends Application {
 //
 //        enemyTurn = cell.shoot();
 
-
-        Cell cell = null;
-        int x = 0, y = 0;
-        if (enemyTurn) {
-            x = random.nextInt(10);
-            y = random.nextInt(10);
-            System.out.println("Pierwsze IF X: " + x);
-            System.out.println("Piererwsze IF Y: " + y);
-
-            cell = playerBoard.getCell(x, y);
-            while(cell.wasShot){
+            Cell cell = null;
+            int x = 0, y = 0;
+            if (enemyTurn) {
                 x = random.nextInt(10);
                 y = random.nextInt(10);
+                System.out.println("Pierwsze IF X: " + x);
+                System.out.println("Piererwsze IF Y: " + y);
 
-                System.out.println("WHILE X: " + x);
-                System.out.println("WHILE Y: " + y);
                 cell = playerBoard.getCell(x, y);
-                if (!cell.wasShot){
-                    break;
+                while (cell.wasShot) {
+                    x = random.nextInt(10);
+                    y = random.nextInt(10);
+
+                    System.out.println("WHILE X: " + x);
+                    System.out.println("WHILE Y: " + y);
+                    cell = playerBoard.getCell(x, y);
+                    if (!cell.wasShot) {
+                        break;
+                    }
                 }
             }
-        }
 
-        enemyTurn = cell.shoot();
+                enemyTurn = cell.shoot();
 
-        while(enemyTurn){
-            if(x < 5){
-                cell = playerBoard.getCell(x + 1, y);
-                System.out.println("dobitla z +1");
-            }else if(x > 4){
-                cell = playerBoard.getCell(x - 1, y);
-                System.out.println("dobitla z -1");
+            while (enemyTurn) {
+                if (x < 5) {
+                    cell = playerBoard.getCell(x + 1, y);
+                    System.out.println("dobitla z +1");
+                } else if (x > 4) {
+                    cell = playerBoard.getCell(x - 1, y);
+                    System.out.println("dobitla z -1");
+                }
+                if (cell.wasShot) {
+                    x = random.nextInt(10);
+                    y = random.nextInt(10);
+                    System.out.println("dobitka + powtorzony");
+                    cell = playerBoard.getCell(x - 1, y);
+                    if (!cell.wasShot) break;
+                }
+
+                enemyTurn = cell.shoot();
+                if (enemyTurn) continue;
+                if (playerBoard.ships == 0) break;
             }
-            if(cell.wasShot){
-                x = random.nextInt(10);
-                y = random.nextInt(10);
-                System.out.println("dobitka + powtorzony");
-                cell = playerBoard.getCell(x - 1, y);
-                if(!cell.wasShot) break;
+
+
+            if (playerBoard.ships == 0) {
+                System.out.println("YOU LOSE");
             }
-            enemyTurn = cell.shoot();
-            if(enemyTurn) continue;
-            if (playerBoard.ships == 0) break;
-        }
-
-
-        if (playerBoard.ships == 0) {
-            System.out.println("YOU LOSE");
-        }
 
     }
 

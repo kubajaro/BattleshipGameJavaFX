@@ -139,7 +139,7 @@ public class Board extends Parent {
         return isValidPoint(point.getX(), point.getY());
     }
 
-    private boolean isValidPoint(double x, double y) {
+    public boolean isValidPoint(double x, double y) {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
@@ -174,5 +174,6 @@ public class Board extends Parent {
 
             return false;
         }
+
     }
 }
