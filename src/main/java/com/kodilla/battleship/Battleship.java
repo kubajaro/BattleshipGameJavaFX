@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import com.kodilla.battleship.Board.Cell;
@@ -50,8 +51,6 @@ public class Battleship extends Application {
             @Override
             public void handle(ActionEvent event) {
                 running = false;
-                switchScene(gameScene);
-
             }
         });
         root.setRight(restartGame);
@@ -72,6 +71,7 @@ public class Battleship extends Application {
 
             if (enemyBoard.ships == 0) {
                 System.out.println("YOU WIN");
+                PopupWindow.displayPopup("YOU WIN", "Congratulations, you won!");
             }
 
             if (enemyTurn)
@@ -96,74 +96,6 @@ public class Battleship extends Application {
         root.setCenter(vbox);
 
         return root;
-    }
-
-    private void enemyMove() {
-
-//        int x = random.nextInt(10);
-//        int y = random.nextInt(10);
-//
-//        Cell cell = playerBoard.getCell(x,y);
-//
-//        while (cell.wasShot){
-//            x = random.nextInt(10);
-//            y = random.nextInt(10);
-//            cell = playerBoard.getCell(x,y);
-//            if(!cell.wasShot) break;
-//        }
-//
-//        enemyTurn = cell.shoot();
-
-            Cell cell = null;
-            int x = 0, y = 0;
-            if (enemyTurn) {
-                x = random.nextInt(10);
-                y = random.nextInt(10);
-                System.out.println("Pierwsze IF X: " + x);
-                System.out.println("Piererwsze IF Y: " + y);
-
-                cell = playerBoard.getCell(x, y);
-                while (cell.wasShot) {
-                    x = random.nextInt(10);
-                    y = random.nextInt(10);
-
-                    System.out.println("WHILE X: " + x);
-                    System.out.println("WHILE Y: " + y);
-                    cell = playerBoard.getCell(x, y);
-                    if (!cell.wasShot) {
-                        break;
-                    }
-                }
-            }
-
-                enemyTurn = cell.shoot();
-
-            while (enemyTurn) {
-                if (x < 5) {
-                    cell = playerBoard.getCell(x + 1, y);
-                    System.out.println("dobitla z +1");
-                } else if (x > 4) {
-                    cell = playerBoard.getCell(x - 1, y);
-                    System.out.println("dobitla z -1");
-                }
-                if (cell.wasShot) {
-                    x = random.nextInt(10);
-                    y = random.nextInt(10);
-                    System.out.println("dobitka + powtorzony");
-                    cell = playerBoard.getCell(x - 1, y);
-                    if (!cell.wasShot) break;
-                }
-
-                enemyTurn = cell.shoot();
-                if (enemyTurn) continue;
-                if (playerBoard.ships == 0) break;
-            }
-
-
-            if (playerBoard.ships == 0) {
-                System.out.println("YOU LOSE");
-            }
-
     }
 
     private void startGame() {
@@ -222,5 +154,7 @@ public class Battleship extends Application {
 
     public static void main(String[] args) {
         launch(args);
+        EnemyMove enemyMove = new EnemyMove();
+        enemyMove.createCellList(10,0);
     }
 }

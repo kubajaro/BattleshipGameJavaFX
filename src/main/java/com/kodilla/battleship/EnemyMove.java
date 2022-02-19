@@ -10,7 +10,6 @@ public class EnemyMove {
     boolean enemyTurn;
 
     private Board.Cell getCellFromPlayerBoard(){
-        Board.Cell cell;
 
         int x = random.nextInt(10);
         int y = random.nextInt(10);
@@ -26,23 +25,47 @@ public class EnemyMove {
     public ArrayList<Board.Cell> createCellList(int x, int y){
         ArrayList<Board.Cell> cellList = new ArrayList<>();
 
-        if(!playerBoard.getCell(x - 1, y).wasShot && playerBoard.isValidPoint(x - 1, y)){
+        if(playerBoard.isValidPoint(x - 1, y) && !playerBoard.getCell(x - 1, y).wasShot){
             cellList.add(playerBoard.getCell(x - 1, y));
+            System.out.println("First check");
         }
 
-        if(!playerBoard.getCell(x + 1, y).wasShot && playerBoard.isValidPoint(x+1, y)){
+        if(playerBoard.isValidPoint(x+1, y) && !playerBoard.getCell(x + 1, y).wasShot){
             cellList.add(playerBoard.getCell(x + 1, y));
+            System.out.println("Second check");
         }
 
-        if(!playerBoard.getCell(x, y - 1).wasShot && playerBoard.isValidPoint(x, y - 1)){
+        if(playerBoard.isValidPoint(x, y - 1) && !playerBoard.getCell(x, y - 1).wasShot){
             cellList.add(playerBoard.getCell(x, y - 1));
+            System.out.println("Third check");
         }
 
-        if(!playerBoard.getCell(x, y + 1).wasShot && playerBoard.isValidPoint(x, y + 1)){
+        if(playerBoard.isValidPoint(x, y + 1) && !playerBoard.getCell(x, y + 1).wasShot){
             cellList.add(playerBoard.getCell(x, y + 1));
+            System.out.println("Fourth check");
         }
 
         return cellList;
+    }
+
+    public void followUpShot(boolean wasShipDown, Board.Cell shotCell){
+        boolean enemyTurn = wasShipDown;
+        if(enemyTurn){
+            ArrayList<Board.Cell> possibleNextMoves = createCellList(shotCell.x, shotCell.y);
+            if(!possibleNextMoves.isEmpty()) {
+                cell = possibleNextMoves.get(random.nextInt(possibleNextMoves.size()));
+            }else{
+                cell = getCellFromPlayerBoard();
+            }
+            enemyTurn = cell.shoot();
+            System.out.println("Second shot x: " + cell.x + " y: " + cell.y);
+
+            if(enemyTurn){
+                System.out.println("Follow up shot");
+                followUpShot(enemyTurn, cell);
+            }
+
+        }
     }
 
     public void enemyMove(Board playerBoard){
@@ -52,16 +75,13 @@ public class EnemyMove {
         enemyTurn = cell.shoot();
         System.out.println("First shot: " + cell.x + " " + cell.y);
 
-        if(enemyTurn){
-            ArrayList<Board.Cell> possibleNextMoves = createCellList(cell.x, cell.y);
-            if(!possibleNextMoves.isEmpty()) {
-                cell = possibleNextMoves.get(random.nextInt(possibleNextMoves.size()));
-            }else{
-                cell = getCellFromPlayerBoard();
-            }
-            enemyTurn = cell.shoot();
-            System.out.println("Second shot: " + cell.x + " " + cell.y);
+        followUpShot(enemyTurn, cell);
+
+        if (playerBoard.ships == 0) {
+            System.out.println("YOU LOSE");
+            PopupWindow.displayPopup("YOU LOSE", "You can do better");
         }
+
     }
 
 }
