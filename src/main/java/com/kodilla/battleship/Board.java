@@ -3,6 +3,7 @@ package com.kodilla.battleship;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.FillTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
@@ -11,6 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class Board extends Parent {
     private VBox rows = new VBox();
@@ -159,11 +161,14 @@ public class Board extends Parent {
 
         public boolean shoot() {
             wasShot = true;
-            setFill(Color.BLACK);
-
-            if (ship != null) {
+            if(ship == null) {
+                FillTransition missTransition = new FillTransition(Duration.seconds(0.5), this, Color.BLUE, Color.BLACK);
+                missTransition.play();
+            }
+           else if (ship != null) {
                 ship.hit();
-                setFill(Color.RED);
+                FillTransition shotTransition = new FillTransition(Duration.seconds(0.5), this, Color.ORANGE, Color.RED);
+                shotTransition.play();
                 if (!ship.isAlive()) {
                     board.ships--;
                 }
