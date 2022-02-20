@@ -2,7 +2,6 @@ package com.kodilla.battleship;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
@@ -170,9 +169,7 @@ public class Board extends Parent {
                 }
                 return true;
             }
-
             return false;
         }
-
     }
 }

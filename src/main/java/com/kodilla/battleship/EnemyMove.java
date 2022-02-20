@@ -80,7 +80,7 @@ public class EnemyMove {
 
         if (playerBoard.ships == 0) {
             System.out.println("YOU LOSE");
-            PopupWindow.displayPopup("YOU LOSE", "You can do better");
+            PopupWindow.endGamePopup("YOU LOSE", "You can do better");
         }
     }
 }

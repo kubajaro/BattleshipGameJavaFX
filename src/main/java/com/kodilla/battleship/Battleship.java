@@ -15,7 +15,5 @@ public class Battleship extends Application {
 
     public static void main(String[] args) {
         launch(args);
-        EnemyMove enemyMove = new EnemyMove();
-        enemyMove.createCellList(10,0);
     }
 }

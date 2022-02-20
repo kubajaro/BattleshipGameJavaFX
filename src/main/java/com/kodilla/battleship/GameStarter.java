@@ -10,16 +10,11 @@ import javafx.scene.layout.*;
 import java.util.Random;
 
 public class GameStarter {
-
     private boolean running = false;
     private Board enemyBoard, playerBoard;
-
     private int shipsToPlace = 5;
-
     private boolean enemyTurn = false;
-
     private Random random = new Random();
-
     private EnemyMove enemyMove = new EnemyMove();
 
     public Parent createContent() {
@@ -30,6 +25,7 @@ public class GameStarter {
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
         root.setBackground(new Background(backgroundImage));
 
+        PopupWindow.displayGameRulesPopup();
 
         Button restartGame = new Button("Restart game");
         restartGame.setOnAction(e -> {
@@ -53,7 +49,7 @@ public class GameStarter {
 
             if (enemyBoard.ships == 0) {
                 System.out.println("YOU WIN");
-                PopupWindow.displayPopup("YOU WIN", "Congratulations, you won!");
+                PopupWindow.endGamePopup("YOU WIN", "Congratulations, you won!");
             }
 
             if (enemyTurn)
