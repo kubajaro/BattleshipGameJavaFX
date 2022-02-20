@@ -17,7 +17,6 @@ public class Board extends Parent {
     private VBox rows = new VBox();
     private boolean enemy = false;
     public int ships = 5;
-    Random random = new Random();
 
     public Board() {
     }

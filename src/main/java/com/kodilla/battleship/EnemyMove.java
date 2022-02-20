@@ -10,7 +10,6 @@ public class EnemyMove {
     boolean enemyTurn;
 
     private Board.Cell getCellFromPlayerBoard(){
-
         int x = random.nextInt(10);
         int y = random.nextInt(10);
 
@@ -49,6 +48,7 @@ public class EnemyMove {
     }
 
     public void followUpShot(boolean wasShipDown, Board.Cell shotCell){
+
         boolean enemyTurn = wasShipDown;
         if(enemyTurn){
             ArrayList<Board.Cell> possibleNextMoves = createCellList(shotCell.x, shotCell.y);
@@ -69,6 +69,7 @@ public class EnemyMove {
     }
 
     public void enemyMove(Board playerBoard){
+
         this.playerBoard = playerBoard;
         cell = getCellFromPlayerBoard();
 
@@ -81,7 +82,5 @@ public class EnemyMove {
             System.out.println("YOU LOSE");
             PopupWindow.displayPopup("YOU LOSE", "You can do better");
         }
-
     }
-
 }
