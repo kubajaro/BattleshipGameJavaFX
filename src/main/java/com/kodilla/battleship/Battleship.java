@@ -4,12 +4,11 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Battleship extends Application {
-    private Stage mainStage;
     CreateStage createStage = new CreateStage();
+    private Stage mainStage = createStage.createStartStage();
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        mainStage = createStage.createStartStage();
+    public void start(Stage primaryStage) {
         mainStage.show();
     }
 

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 import java.util.Random;
 
@@ -16,6 +17,7 @@ public class GameStarter {
     private boolean enemyTurn = false;
     private Random random = new Random();
     private EnemyMove enemyMove = new EnemyMove();
+    private Stage stage = new Stage();
 
     public Parent createContent() {
         BorderPane root = new BorderPane();
@@ -26,13 +28,6 @@ public class GameStarter {
         root.setBackground(new Background(backgroundImage));
 
         PopupWindow.displayGameRulesPopup();
-
-        Button restartGame = new Button("Restart game");
-        restartGame.setOnAction(e -> {
-            running = false;
-        });
-        root.setRight(restartGame);
-
 
         //root.setRight(new Text("RIGHT SIDEBAR - CONTROLS"));
 
@@ -72,6 +67,12 @@ public class GameStarter {
         vbox.setAlignment(Pos.CENTER);
 
         root.setCenter(vbox);
+
+        Button restartGame = new Button("Restart game");
+        restartGame.setOnAction(e -> {
+            RestartGameButton.restartGame();
+        });
+        root.setRight(restartGame);
 
         return root;
     }
