@@ -162,7 +162,7 @@ public class Board extends Parent {
         public boolean shoot() {
             wasShot = true;
             if(ship == null) {
-                FillTransition missTransition = new FillTransition(Duration.seconds(0.5), this, Color.BLUE, Color.BLACK);
+                FillTransition missTransition = new FillTransition(Duration.seconds(0.5), this, Color.ORANGE, Color.BLACK);
                 missTransition.play();
             }
            else if (ship != null) {
