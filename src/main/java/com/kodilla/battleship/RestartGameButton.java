@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.stage.Stage;
 
 public class RestartGameButton {
+
     public static void restartGame(){
         Platform.runLater(() -> {
            try {

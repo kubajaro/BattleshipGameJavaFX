@@ -41,7 +41,6 @@ public class GameStarter {
 
             enemyTurn = !cell.shoot();
 
-
             if (enemyBoard.ships == 0) {
                 System.out.println("YOU WIN");
                 PopupWindow.endGamePopup("YOU WIN", "Congratulations, you won!");
@@ -68,11 +67,13 @@ public class GameStarter {
 
         root.setCenter(vbox);
 
-        Button restartGame = new Button("Restart game");
-        restartGame.setOnAction(e -> {
+        Button restartGameButton = new Button("Restart game");
+        restartGameButton.setOnAction(e -> {
             RestartGameButton.restartGame();
         });
-        root.setRight(restartGame);
+        BorderPane buttonBorderPane = new BorderPane();
+        buttonBorderPane.setCenter(restartGameButton);
+        root.setRight(buttonBorderPane);
 
         return root;
     }

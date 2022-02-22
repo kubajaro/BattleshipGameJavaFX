@@ -1,12 +1,14 @@
 package com.kodilla.battleship;
 
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class CreateStage {
     private Scene gameScene;
@@ -17,13 +19,13 @@ public class CreateStage {
 
     GameStarter gameStarter = new GameStarter();
 
-    private Image image = new Image("file: battleship.png");
+    private Image image = new Image("battleship.jpg");
     BackgroundSize backgroundSize = new BackgroundSize(100, 100, false, false, true, false);
 
     Background background = new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize));
 
     public Stage createStartStage(){
-        BorderPane root = new BorderPane();
+        Pane root = new Pane();
         root.setPrefSize(800, 550);
 
 
@@ -32,9 +34,12 @@ public class CreateStage {
         mainStage.setTitle("Battleship");
         startGameButton = new Button("Start game");
         startGameButton.setOnAction(e -> switchScene(createGameScene()));
+        startGameButton.setLayoutX(350);
+        startGameButton.setLayoutY(350);
+        startGameButton.setSkin(new StartGameButtonAnimation(startGameButton));
 
         root.setBackground(background);
-        root.setCenter(startGameButton);
+        root.getChildren().add(startGameButton);
         mainStage.setScene(startScene);
 
         return mainStage;
