@@ -1,8 +1,10 @@
 package com.kodilla.battleship;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
@@ -19,9 +21,11 @@ public class GameStarter {
     private EnemyMove enemyMove = new EnemyMove();
     private Stage stage = new Stage();
 
+    Insets labelPositioning = new Insets(0, 0, 0, 0);
+
     public Parent createContent() {
         BorderPane root = new BorderPane();
-        root.setPrefSize(800, 550);
+        root.setPrefSize(600, 550);
 
         BackgroundImage backgroundImage = new BackgroundImage(new Image("file:battleship.jpg", 800,550,false,true),
                 BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
@@ -62,10 +66,16 @@ public class GameStarter {
             }
         });
 
-        VBox vbox = new VBox(50, enemyBoard, playerBoard);
+        Label playerBoardLabel = new Label("Your board"
+                +"\n place your ships here.", playerBoard);
+        Label enemyBoardLabel = new Label("Enemy board"
+                +"\n after placing your ships, " +
+                "\ntry to shoot enemy's ships", enemyBoard);
+
+        VBox vbox = new VBox(50, enemyBoardLabel, enemyBoard, playerBoardLabel, playerBoard);
         vbox.setAlignment(Pos.CENTER);
 
-        root.setCenter(vbox);
+        root.setLeft(vbox);
 
         Button restartGameButton = new Button("Restart game");
         restartGameButton.setOnAction(e -> {
@@ -74,6 +84,9 @@ public class GameStarter {
         BorderPane buttonBorderPane = new BorderPane();
         buttonBorderPane.setCenter(restartGameButton);
         root.setRight(buttonBorderPane);
+
+        BorderPane.setMargin(buttonBorderPane, new Insets(50));
+        BorderPane.setMargin(vbox, new Insets(50));
 
         return root;
     }

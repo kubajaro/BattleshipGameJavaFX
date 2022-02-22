@@ -9,6 +9,7 @@ public class Battleship extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        mainStage.centerOnScreen();
         mainStage.show();
     }
 
