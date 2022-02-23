@@ -3,9 +3,10 @@ package com.kodilla.battleship;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
-public class RestartGameButton {
+public class RestartGame {
 
     public static void restartGame(){
+        Platform.isImplicitExit();
         Platform.runLater(() -> {
            try {
                new Battleship().start(new Stage());

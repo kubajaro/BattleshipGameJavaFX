@@ -88,7 +88,6 @@ public class Board extends Parent {
                 neighbors.add(getCell((int)p.getX(), (int)p.getY()));
             }
         }
-
         return neighbors.toArray(new Cell[0]);
     }
 
@@ -176,5 +175,8 @@ public class Board extends Parent {
             }
             return false;
         }
+
+
+
     }
 }

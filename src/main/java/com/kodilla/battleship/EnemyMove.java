@@ -57,7 +57,7 @@ public class EnemyMove {
             }else{
                 cell = getCellFromPlayerBoard();
             }
-            enemyTurn = cell.shoot();
+            enemyTurn = cell.enemyShot();
             System.out.println("Second shot x: " + cell.x + " y: " + cell.y);
 
             if(enemyTurn){
@@ -73,7 +73,7 @@ public class EnemyMove {
         this.playerBoard = playerBoard;
         cell = getCellFromPlayerBoard();
 
-        enemyTurn = cell.shoot();
+        enemyTurn = cell.enemyShot();
         System.out.println("First shot: " + cell.x + " " + cell.y);
 
         followUpShot(enemyTurn, cell);

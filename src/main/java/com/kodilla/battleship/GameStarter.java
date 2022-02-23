@@ -5,10 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
 
 import java.util.Random;
 
@@ -19,21 +17,11 @@ public class GameStarter {
     private boolean enemyTurn = false;
     private Random random = new Random();
     private EnemyMove enemyMove = new EnemyMove();
-    private Stage stage = new Stage();
 
-    Insets labelPositioning = new Insets(0, 0, 0, 0);
 
     public Parent createContent() {
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 550);
-
-        BackgroundImage backgroundImage = new BackgroundImage(new Image("file:battleship.jpg", 800,550,false,true),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT , BackgroundPosition.CENTER, BackgroundSize.DEFAULT);
-        root.setBackground(new Background(backgroundImage));
-
-        PopupWindow.displayGameRulesPopup();
-
-        //root.setRight(new Text("RIGHT SIDEBAR - CONTROLS"));
 
         enemyBoard = new Board(true, event -> {
             if (!running)
@@ -50,8 +38,9 @@ public class GameStarter {
                 PopupWindow.endGamePopup("YOU WIN", "Congratulations, you won!");
             }
 
-            if (enemyTurn)
+            if (enemyTurn) {
                 enemyMove.enemyMove(playerBoard);
+            }
         });
 
         playerBoard = new Board(false, event -> {
@@ -79,8 +68,9 @@ public class GameStarter {
 
         Button restartGameButton = new Button("Restart game");
         restartGameButton.setOnAction(e -> {
-            RestartGameButton.restartGame();
+            RestartGame.restartGame();
         });
+
         BorderPane buttonBorderPane = new BorderPane();
         buttonBorderPane.setCenter(restartGameButton);
         root.setRight(buttonBorderPane);
@@ -103,7 +93,6 @@ public class GameStarter {
                 type--;
             }
         }
-
         running = true;
     }
 
