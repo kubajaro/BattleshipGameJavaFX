@@ -38,9 +38,8 @@ public class GameStarter {
                 PopupWindow.endGamePopup("YOU WIN", "Congratulations, you won!");
             }
 
-            if (enemyTurn) {
-                enemyMove.enemyMove(playerBoard);
-            }
+                if (enemyTurn)
+                    enemyMove.enemyMove(playerBoard);
         });
 
         playerBoard = new Board(false, event -> {
@@ -68,7 +67,7 @@ public class GameStarter {
 
         Button restartGameButton = new Button("Restart game");
         restartGameButton.setOnAction(e -> {
-            RestartGame.restartGame();
+            RestartGame.restartGame(restartGameButton);
         });
 
         BorderPane buttonBorderPane = new BorderPane();
