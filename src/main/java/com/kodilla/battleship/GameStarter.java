@@ -24,6 +24,7 @@ public class GameStarter {
         root.setPrefSize(600, 550);
 
         enemyBoard = new Board(true, event -> {
+
             if (!running)
                 return;
 
