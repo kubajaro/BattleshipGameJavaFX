@@ -28,7 +28,7 @@ public class GameStarter {
             if (!running)
                 return;
 
-            Board.Cell cell = (Board.Cell) event.getSource();
+            Cell cell = (Cell) event.getSource();
             if (cell.wasShot)
                 return;
 
@@ -39,15 +39,15 @@ public class GameStarter {
                 PopupWindow.endGamePopup("YOU WIN", "Congratulations, you won!");
             }
 
-                if (enemyTurn)
-                    enemyMove.enemyMove(playerBoard);
+            if (enemyTurn)
+                enemyMove.enemyMove(playerBoard);
         });
 
         playerBoard = new Board(false, event -> {
             if (running)
                 return;
 
-            Board.Cell cell = (Board.Cell) event.getSource();
+            Cell cell = (Cell) event.getSource();
             if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY), cell.x, cell.y)) {
                 if (--shipsToPlace == 0) {
                     startGame();

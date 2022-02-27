@@ -3,7 +3,6 @@ package com.kodilla.battleship;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.animation.FillTransition;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Parent;
@@ -11,8 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
+
 
 public class Board extends Parent {
     private VBox rows = new VBox();
@@ -142,41 +140,4 @@ public class Board extends Parent {
         return x >= 0 && x < 10 && y >= 0 && y < 10;
     }
 
-    public class Cell extends Rectangle {
-        public int x, y;
-        public Ship ship = null;
-        public boolean wasShot = false;
-
-        private Board board;
-
-        public Cell(int x, int y, Board board) {
-            super(22, 22);
-            this.x = x;
-            this.y = y;
-            this.board = board;
-            setFill(Color.LIGHTGRAY);
-            setStroke(Color.BLACK);
-        }
-
-        public boolean shoot() {
-            wasShot = true;
-            if(ship == null) {
-                FillTransition missTransition = new FillTransition(Duration.seconds(0.5), this, Color.ORANGE, Color.BLACK);
-                missTransition.play();
-            }
-           else if (ship != null) {
-                ship.hit();
-                FillTransition shotTransition = new FillTransition(Duration.seconds(0.5), this, Color.ORANGE, Color.RED);
-                shotTransition.play();
-                if (!ship.isAlive()) {
-                    board.ships--;
-                }
-                return true;
-            }
-            return false;
-        }
-
-
-
-    }
 }

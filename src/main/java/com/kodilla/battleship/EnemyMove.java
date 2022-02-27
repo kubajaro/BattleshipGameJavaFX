@@ -6,10 +6,10 @@ import java.util.Random;
 public class EnemyMove {
     public Board playerBoard = new Board();
     Random random = new Random();
-    Board.Cell cell;
+    Cell cell;
     boolean enemyTurn;
 
-    private Board.Cell getCellFromPlayerBoard(){
+    private Cell getCellFromPlayerBoard(){
         int x = random.nextInt(10);
         int y = random.nextInt(10);
 
@@ -21,8 +21,8 @@ public class EnemyMove {
         return cell;
     }
 
-    public ArrayList<Board.Cell> createCellList(int x, int y){
-        ArrayList<Board.Cell> cellList = new ArrayList<>();
+    public ArrayList<Cell> createCellList(int x, int y){
+        ArrayList<Cell> cellList = new ArrayList<>();
 
         if(playerBoard.isValidPoint(x - 1, y) && !playerBoard.getCell(x - 1, y).wasShot){
             cellList.add(playerBoard.getCell(x - 1, y));
@@ -47,11 +47,11 @@ public class EnemyMove {
         return cellList;
     }
 
-    public void followUpShot(boolean wasShipDown, Board.Cell shotCell){
+    public void followUpShot(boolean wasShipDown, Cell shotCell){
 
         boolean enemyTurn = wasShipDown;
         if(enemyTurn){
-            ArrayList<Board.Cell> possibleNextMoves = createCellList(shotCell.x, shotCell.y);
+            ArrayList<Cell> possibleNextMoves = createCellList(shotCell.x, shotCell.y);
             if(!possibleNextMoves.isEmpty()) {
                 cell = possibleNextMoves.get(random.nextInt(possibleNextMoves.size()));
             }else{
