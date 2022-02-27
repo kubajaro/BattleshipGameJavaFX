@@ -1,14 +1,11 @@
 package com.kodilla.battleship;
 
-import javafx.animation.Interpolator;
-import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Duration;
 
 public class CreateStage {
     private Scene gameScene;
@@ -17,7 +14,7 @@ public class CreateStage {
     private Scene startScene;
     private Button startGameButton;
 
-    GameStarter gameStarter = new GameStarter();
+    StartGameProcess gameStarter = new StartGameProcess();
 
     private Image image = new Image("battleship.jpg");
     BackgroundSize backgroundSize = new BackgroundSize(100, 100, false, false, true, false);

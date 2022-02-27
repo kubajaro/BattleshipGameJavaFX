@@ -59,12 +59,10 @@ public class EnemyMove {
             }
             enemyTurn = cell.shoot();
             System.out.println("Second shot x: " + cell.x + " y: " + cell.y);
-
             if(enemyTurn){
                 System.out.println("Follow up shot");
                 followUpShot(enemyTurn, cell);
             }
-
         }
     }
 

@@ -13,7 +13,7 @@ import javafx.scene.paint.Color;
 
 
 public class Board extends Parent {
-    private VBox rows = new VBox();
+    private final VBox rows = new VBox();
     private boolean enemy = false;
     public int ships = 5;
 
@@ -79,7 +79,7 @@ public class Board extends Parent {
                 new Point2D(x, y + 1)
         };
 
-        List<Cell> neighbors = new ArrayList<Cell>();
+        List<Cell> neighbors = new ArrayList<>();
 
         for (Point2D p : points) {
             if (isValidPoint(p)) {

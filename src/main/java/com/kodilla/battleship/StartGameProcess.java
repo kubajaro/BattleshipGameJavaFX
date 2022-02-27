@@ -3,14 +3,13 @@ package com.kodilla.battleship;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.*;
 
 import java.util.Random;
 
-public class GameStarter {
+public class StartGameProcess {
     private boolean running = false;
     private Board enemyBoard, playerBoard;
     private int shipsToPlace = 5;
@@ -22,6 +21,8 @@ public class GameStarter {
     public Parent createContent() {
         BorderPane root = new BorderPane();
         root.setPrefSize(600, 550);
+
+        PopupWindow.displayGameRulesPopup();
 
         enemyBoard = new Board(true, event -> {
 
@@ -50,7 +51,7 @@ public class GameStarter {
             Cell cell = (Cell) event.getSource();
             if (playerBoard.placeShip(new Ship(shipsToPlace, event.getButton() == MouseButton.PRIMARY), cell.x, cell.y)) {
                 if (--shipsToPlace == 0) {
-                    startGame();
+                    placeEnemyShips();
                 }
             }
         });
@@ -64,25 +65,18 @@ public class GameStarter {
         VBox vbox = new VBox(50, enemyBoardLabel, enemyBoard, playerBoardLabel, playerBoard);
         vbox.setAlignment(Pos.CENTER);
 
-        root.setLeft(vbox);
-
-        Button restartGameButton = new Button("Restart game");
-        restartGameButton.setOnAction(e -> {
-            RestartGame.restartGame(restartGameButton);
-        });
-
-        BorderPane buttonBorderPane = new BorderPane();
-        buttonBorderPane.setCenter(restartGameButton);
-        root.setRight(buttonBorderPane);
-
+        BorderPane buttonBorderPane = RestartGameButton.restartGameButton();
         BorderPane.setMargin(buttonBorderPane, new Insets(50));
         BorderPane.setMargin(vbox, new Insets(50));
+
+        root.setLeft(vbox);
+        root.setRight(buttonBorderPane);
 
         return root;
     }
 
-    private void startGame() {
-        // place enemy ships
+    private void placeEnemyShips() {
+
         int type = 5;
 
         while (type > 0) {

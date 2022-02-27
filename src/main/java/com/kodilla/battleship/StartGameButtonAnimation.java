@@ -1,6 +1,5 @@
 package com.kodilla.battleship;
 
-import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.ScaleTransition;
 import javafx.animation.TranslateTransition;
