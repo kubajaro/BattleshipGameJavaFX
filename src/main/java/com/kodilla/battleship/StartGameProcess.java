@@ -76,7 +76,6 @@ public class StartGameProcess {
     }
 
     private void placeEnemyShips() {
-
         int type = 5;
 
         while (type > 0) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="BoardTestSuite" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-02-18T23:03:02" hostname="LAPTOP-O76U7N91" time="0.893">
+<testsuite name="EnemyMoveTestSuite" tests="1" skipped="0" failures="1" errors="0" timestamp="2022-02-28T23:37:56" hostname="LAPTOP-O76U7N91" time="1.582">
   <properties/>
-  <testcase name="createCellListTest()" classname="BoardTestSuite" time="0.893">
-    <failure message="java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0" type="java.lang.IndexOutOfBoundsException">java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+  <testcase name="createCellListTest()" classname="EnemyMoveTestSuite" time="1.582">
+    <failure message="java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 0" type="java.lang.IndexOutOfBoundsException">java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 0
 	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)
 	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)
 	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:248)
@@ -10,9 +10,9 @@
 	at java.base/java.util.ArrayList.get(ArrayList.java:459)
 	at com.sun.javafx.collections.ObservableListWrapper.get(ObservableListWrapper.java:89)
 	at com.sun.javafx.collections.VetoableListDecorator.get(VetoableListDecorator.java:305)
-	at com.kodilla.battleship.Board.getCell(Board.java:73)
-	at com.kodilla.battleship.EnemyMove.createCellList(EnemyMove.java:29)
-	at BoardTestSuite.createCellListTest(BoardTestSuite.java:51)
+	at com.kodilla.battleship.Board.getCell(Board.java:71)
+	at com.kodilla.battleship.EnemyMove.createCellList(EnemyMove.java:27)
+	at EnemyMoveTestSuite.createCellListTest(EnemyMoveTestSuite.java:49)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
 	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)

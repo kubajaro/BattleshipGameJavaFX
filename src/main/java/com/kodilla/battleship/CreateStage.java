@@ -16,7 +16,7 @@ public class CreateStage {
 
     StartGameProcess gameStarter = new StartGameProcess();
 
-    private Image image = new Image("battleship.jpg");
+    Image image = new Image("battleship.jpg");
     BackgroundSize backgroundSize = new BackgroundSize(100, 100, false, false, true, false);
 
     Background background = new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize));

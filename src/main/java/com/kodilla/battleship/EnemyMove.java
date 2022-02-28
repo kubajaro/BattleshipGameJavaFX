@@ -43,7 +43,6 @@ public class EnemyMove {
             cellList.add(playerBoard.getCell(x, y + 1));
             System.out.println("Fourth check");
         }
-
         return cellList;
     }
 

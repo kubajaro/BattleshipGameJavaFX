@@ -22,16 +22,17 @@ public class Cell extends Rectangle {
         setStroke(Color.BLACK);
     }
 
+
     public boolean shoot() {
         wasShot = true;
         if(ship == null) {
             FillTransition missTransition = new FillTransition(Duration.seconds(0.5), this, Color.ORANGE, Color.BLACK);
-            missTransition.play();
+            //missTransition.play();
         }
         else if (ship != null) {
             ship.hit();
             FillTransition shotTransition = new FillTransition(Duration.seconds(0.5), this, Color.ORANGE, Color.RED);
-            shotTransition.play();
+            //shotTransition.play();
             if (!ship.isAlive()) {
                 board.ships--;
             }
