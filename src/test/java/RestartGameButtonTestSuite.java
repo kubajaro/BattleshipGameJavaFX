@@ -7,14 +7,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RestartGameButtonTestSuite {
 
-    @Test
-    void restartGameButton(){
-        //when
-        BorderPane restartGameButtonBorderPane = RestartGameButton.restartGameButton();
-        Button button = (Button) restartGameButtonBorderPane.getCenter();
-        String buttonInnerText = button.getText();
-
-        //then
-        assertEquals("Restart game", buttonInnerText);
-    }
+//    @Test
+//    void restartGameButton(){
+//        //when
+//        BorderPane restartGameButtonBorderPane = RestartGameButton.restartGameButton();
+//        Button button = (Button) restartGameButtonBorderPane.getCenter();
+//        String buttonInnerText = button.getText();
+//
+//        //then
+//        assertEquals("Restart game", buttonInnerText);
+//    }
 }

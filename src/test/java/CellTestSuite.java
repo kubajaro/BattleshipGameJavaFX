@@ -9,18 +9,18 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @ExtendWith({MockitoExtension.class})
 public class CellTestSuite {
-    
-
-    @Test
-    void shootTest(){
-        //given
-        Board board = new Board();
-        Cell cell = new Cell(5, 5, board);
-
-        //when
-        boolean shootTest = cell.shoot();
-
-        //
-        assertFalse(shootTest);
-    }
+//
+//
+//    @Test
+//    void shootTest(){
+//        //given
+//        Board board = new Board();
+//        Cell cell = new Cell(5, 5, board);
+//
+//        //when
+//        boolean shootTest = cell.shoot();
+//
+//        //
+//        assertFalse(shootTest);
+//    }
 }
